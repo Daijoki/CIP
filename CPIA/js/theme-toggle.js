@@ -6,7 +6,8 @@
     
     const STORAGE_KEY = 'primr-theme-preference';
     const DARK_STYLE_KEY = 'primr-dark-style';
-    
+    const LIGHT_STYLE_KEY = 'primr-light-style';
+
     const DARK_STYLES = {
         slate: { name: 'Slate', emoji: '🌑' },
         aurora: { name: 'Northern Lights', emoji: '💠' },
@@ -14,6 +15,14 @@
         frost: { name: 'Frost', emoji: '❄️' },
         blacklight: { name: 'Blacklight', emoji: '🌀' },
         matrix: { name: 'Matrix', emoji: '📟' }
+    };
+
+    const LIGHT_STYLES = {
+        classic: { name: 'Classic', emoji: '☀️' },
+        sunset: { name: 'Sunset', emoji: '🌸' },
+        spring: { name: 'Spring', emoji: '🌿' },
+        lavender: { name: 'Lavender', emoji: '💜' },
+        'ocean-breeze': { name: 'Ocean Breeze', emoji: '🌊' }
     };
     
     // Get theme preference from storage or system
@@ -42,14 +51,14 @@
             return 'slate';
         }
     }
-    
+
     function setDarkStyle(style) {
         try {
             localStorage.setItem(DARK_STYLE_KEY, style);
         } catch (e) {}
         applyDarkStyle(style);
     }
-    
+
     function applyDarkStyle(style) {
         if (style && style !== 'slate') {
             document.documentElement.setAttribute('data-dark-style', style);
@@ -57,18 +66,43 @@
             document.documentElement.removeAttribute('data-dark-style');
         }
     }
+
+    function getLightStyle() {
+        try {
+            return localStorage.getItem(LIGHT_STYLE_KEY) || 'classic';
+        } catch (e) {
+            return 'classic';
+        }
+    }
+
+    function setLightStyle(style) {
+        try {
+            localStorage.setItem(LIGHT_STYLE_KEY, style);
+        } catch (e) {}
+        applyLightStyle(style);
+    }
+
+    function applyLightStyle(style) {
+        if (style && style !== 'classic') {
+            document.documentElement.setAttribute('data-light-style', style);
+        } else {
+            document.documentElement.removeAttribute('data-light-style');
+        }
+    }
     
     // Apply theme to document
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        
-        // Apply dark style if in dark mode
+
+        // Apply dark or light style
         if (theme === 'dark') {
             applyDarkStyle(getDarkStyle());
+            document.documentElement.removeAttribute('data-light-style');
         } else {
+            applyLightStyle(getLightStyle());
             document.documentElement.removeAttribute('data-dark-style');
         }
-        
+
         // Update toggle button icon if it exists
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
@@ -132,36 +166,41 @@
         }, 1000);
     }
     
-    // Create dark style picker popup
-    function showDarkStylePicker(toggleBtn) {
+    // Create style picker popup for both dark and light modes
+    function showStylePicker(toggleBtn) {
         // Remove existing picker
-        const existing = document.getElementById('dark-style-picker');
+        const existing = document.getElementById('style-picker');
         if (existing) {
             existing.remove();
             return;
         }
-        
-        const currentStyle = getDarkStyle();
+
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const isDark = currentTheme === 'dark';
+        const styles = isDark ? DARK_STYLES : LIGHT_STYLES;
+        const currentStyle = isDark ? getDarkStyle() : getLightStyle();
+        const setStyle = isDark ? setDarkStyle : setLightStyle;
+
         const rect = toggleBtn.getBoundingClientRect();
-        
+
         const picker = document.createElement('div');
-        picker.id = 'dark-style-picker';
+        picker.id = 'style-picker';
         picker.style.cssText = `
             position: fixed;
             top: ${rect.bottom + 8}px;
             left: ${rect.left}px;
-            background: var(--bg-lighter, #1E293B);
-            border: 1px solid var(--border-medium, #475569);
+            background: var(--bg-lighter, ${isDark ? '#1E293B' : '#F1F5F9'});
+            border: 1px solid var(--border-medium, ${isDark ? '#475569' : '#CBD5E1'});
             border-radius: 8px;
             padding: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,${isDark ? '0.3' : '0.15'});
             z-index: 9999;
-            min-width: 140px;
+            min-width: 160px;
         `;
-        
+
         picker.innerHTML = `
-            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px; padding: 0 4px;">Dark Mode Style</div>
-            ${Object.entries(DARK_STYLES).map(([key, {name, emoji}]) => `
+            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px; padding: 0 4px;">${isDark ? 'Dark' : 'Light'} Mode Style</div>
+            ${Object.entries(styles).map(([key, {name, emoji}]) => `
                 <button data-style="${key}" style="
                     display: flex;
                     align-items: center;
@@ -178,18 +217,18 @@
                 ">${emoji} ${name}</button>
             `).join('')}
         `;
-        
+
         document.body.appendChild(picker);
-        
+
         // Handle clicks
         picker.addEventListener('click', (e) => {
             const btn = e.target.closest('[data-style]');
             if (btn) {
-                setDarkStyle(btn.dataset.style);
+                setStyle(btn.dataset.style);
                 picker.remove();
             }
         });
-        
+
         // Close on outside click
         setTimeout(() => {
             document.addEventListener('click', function closePickerHandler(e) {
@@ -226,16 +265,14 @@
                 }
             });
             
-            // Right-click or long-press shows dark style picker (only in dark mode)
+            // Right-click shows style picker (dark or light mode)
             themeToggle.addEventListener('contextmenu', function(e) {
-                if (document.documentElement.getAttribute('data-theme') === 'dark') {
-                    e.preventDefault();
-                    showDarkStylePicker(themeToggle);
-                }
+                e.preventDefault();
+                showStylePicker(themeToggle);
             });
-            
+
             // Add hint tooltip
-            themeToggle.title = 'Click to toggle • Right-click for dark styles';
+            themeToggle.title = 'Click to toggle • Right-click for style variants';
         }
         
         // Listen for system theme changes
@@ -259,4 +296,5 @@
     // Expose functions globally
     window.toggleTheme = toggleTheme;
     window.setDarkStyle = setDarkStyle;
+    window.setLightStyle = setLightStyle;
 })();
