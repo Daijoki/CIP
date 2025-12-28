@@ -114,7 +114,7 @@ if (iframe) {
         iframeDoc.body.setAttribute('data-theme', theme);
       }
     } catch (e) {
-      console.warn('Unable to sync theme to document iframe', e);
+      Utils.log.warn('Unable to sync theme to document iframe', e);
     }
   });
 }
@@ -183,7 +183,7 @@ if (iframe) {
         // Get notesManager from window if not set on instance
         const notesManager = this.notesManager || window.notesManager;
         if (!notesManager || !this.currentUrl) {
-            console.warn('NotesManager not available or no URL set');
+            Utils.log.warn('NotesManager not available or no URL set');
             return;
         }
 

@@ -33,7 +33,7 @@ const DataLoader = {
             this.cache[filename] = data;
             return data;
         } catch (error) {
-            console.error(`Error loading ${filename}:`, error);
+            Utils.log.error(`Error loading ${filename}:`, error);
             throw new Error(`Failed to load ${filename}. ${error.message}`);
         }
     },

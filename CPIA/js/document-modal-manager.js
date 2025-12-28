@@ -165,7 +165,7 @@ class DocumentModalManager {
         // Get notesManager from window if not set on instance
         const notesManager = this.notesManager || window.notesManager;
         if (!notesManager || !this.currentUrl) {
-            console.warn('NotesManager not available or no URL set');
+            Utils.log.warn('NotesManager not available or no URL set');
             return;
         }
 

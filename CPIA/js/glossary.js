@@ -27,7 +27,7 @@ class GlossaryManager {
       this.attach();
       this.render();
     } catch (error) {
-      console.error("Glossary init failed:", error);
+      Utils.log.error("Glossary init failed:", error);
       this.showError('Unable to load glossary terms. Please check your connection and try again.');
     }
   }

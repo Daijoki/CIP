@@ -33,7 +33,7 @@ class StateManager {
             return true;
         } catch (e) {
             // Show one-time warning to user
-            console.warn('localStorage not available - progress will not be saved');
+            Utils.log.warn('localStorage not available - progress will not be saved');
             return false;
         }
     }
@@ -52,7 +52,7 @@ class StateManager {
             const data = localStorage.getItem(key);
             return data ? JSON.parse(data) : null;
         } catch (error) {
-            console.error(`Error loading ${key}:`, error);
+            Utils.log.error(`Error loading ${key}:`, error);
             return null;
         }
     }
@@ -62,7 +62,7 @@ class StateManager {
         try {
             localStorage.setItem(key, JSON.stringify(data));
         } catch (error) {
-            console.error(`Error saving ${key}:`, error);
+            Utils.log.error(`Error saving ${key}:`, error);
         }
     }
     
@@ -319,7 +319,7 @@ class StateManager {
             };
 
         } catch (error) {
-            console.error('Import failed:', error);
+            Utils.log.error('Import failed:', error);
             return {
                 success: false,
                 error: error.message
@@ -381,7 +381,7 @@ class StateManager {
             try {
                 callback(type, url, status);
             } catch (error) {
-                console.error('Error in state listener:', error);
+                Utils.log.error('Error in state listener:', error);
             }
         });
     }

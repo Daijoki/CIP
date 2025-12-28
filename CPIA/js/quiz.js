@@ -28,7 +28,7 @@ class QuizManager {
             }
             
             if (!this.urls) {
-                console.warn('Failed to load glossary URLs - citations will not be clickable');
+                Utils.log.warn('Failed to load glossary URLs - citations will not be clickable');
                 this.urls = {};
             }
             
@@ -37,7 +37,7 @@ class QuizManager {
             this.scrollToTopSmooth();
             this.setupEventListeners();
         } catch (error) {
-            console.error('Failed to load quiz:', error);
+            Utils.log.error('Failed to load quiz:', error);
             this.showError('Unable to load quiz questions. Please check your connection and try again.');
         }
     }

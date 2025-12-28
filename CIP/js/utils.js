@@ -75,6 +75,52 @@ const Utils = {
             };
             return escapeMap[char];
         });
+    },
+
+    /**
+     * Sanitize user input for safe HTML insertion
+     * Removes potentially dangerous HTML tags and attributes
+     * @param {string} str - String to sanitize
+     * @returns {string} - Sanitized string
+     */
+    sanitizeHTML(str) {
+        // For maximum safety, escape all HTML by default
+        // Allow specific safe HTML through dedicated methods if needed
+        return this.escapeHTML(str);
+    },
+
+    /**
+     * Logging utility with environment-aware output
+     * Only logs in development, silent in production
+     */
+    log: {
+        _isDev: () => {
+            // Check if we're in development mode
+            // You can set window.DEBUG = true in console to enable logging
+            return window.DEBUG === true || window.location.hostname === 'localhost';
+        },
+
+        debug(...args) {
+            if (this._isDev()) {
+                Utils.log.debug('[DEBUG]', ...args);
+            }
+        },
+
+        info(...args) {
+            if (this._isDev()) {
+                console.info('[INFO]', ...args);
+            }
+        },
+
+        warn(...args) {
+            // Always show warnings
+            Utils.log.warn('[WARN]', ...args);
+        },
+
+        error(...args) {
+            // Always show errors
+            Utils.log.error('[ERROR]', ...args);
+        }
     }
 };
 
