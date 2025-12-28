@@ -818,7 +818,7 @@ class NotesDrawer {
   highlightAndOpenNote(id, type, note) {
     const element = document.querySelector(`[data-item-id="${CSS.escape(id)}"]`);
     if (!element) {
-      console.warn('Could not find target element for note:', id);
+      Utils.log.warn('Could not find target element for note:', id);
       return;
     }
 

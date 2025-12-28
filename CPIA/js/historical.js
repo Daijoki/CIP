@@ -37,7 +37,7 @@ class HistoricalManager {
             
             this.render();
         } catch (error) {
-            console.error('HistoricalManager: Error loading data:', error);
+            Utils.log.error('HistoricalManager: Error loading data:', error);
             this.showError();
         }
     }
@@ -388,7 +388,7 @@ class HistoricalManager {
                         label: title
                     });
                 } else {
-                    console.error('HistoricalManager: notesManager.open not available');
+                    Utils.log.error('HistoricalManager: notesManager.open not available');
                     alert('Notes system is not available. Please refresh the page.');
                 }
             });
@@ -464,7 +464,7 @@ class HistoricalManager {
                         label: title
                     });
                 } else {
-                    console.error('HistoricalManager: notesManager.open not available');
+                    Utils.log.error('HistoricalManager: notesManager.open not available');
                     alert('Notes system is not available. Please refresh the page.');
                 }
             });

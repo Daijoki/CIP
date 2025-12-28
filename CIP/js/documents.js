@@ -38,7 +38,7 @@ class DocumentsManager {
                 });
             }
         } catch (error) {
-            console.error('Failed to load documents:', error);
+            Utils.log.error('Failed to load documents:', error);
             this.showError('Unable to load documents. Please check your connection and try again.');
         }
     }

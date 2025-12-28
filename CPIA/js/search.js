@@ -625,7 +625,7 @@
     const closeBtn = document.getElementById('global-search-close');
     
     if (!S.drawer || !S.input || !S.results) {
-      console.error('Search: Required elements not found');
+      Utils.log.error('Search: Required elements not found');
       return;
     }
     

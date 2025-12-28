@@ -304,7 +304,7 @@ class BackupManager {
       this.showStatus('✓ Backup file downloaded successfully!', 'success');
       setTimeout(() => this.hideStatus(), 3000);
     } catch (error) {
-      console.error('Export failed:', error);
+      Utils.log.error('Export failed:', error);
       this.showStatus('✗ Export failed: ' + error.message, 'error');
     }
   }
@@ -333,7 +333,7 @@ class BackupManager {
         this.showStatus('✗ Import failed: ' + result.error, 'error');
       }
     } catch (error) {
-      console.error('Import failed:', error);
+      Utils.log.error('Import failed:', error);
       this.showStatus('✗ Import failed: ' + error.message, 'error');
     }
     
