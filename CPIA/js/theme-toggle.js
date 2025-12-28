@@ -56,7 +56,10 @@
     function setDarkStyle(style) {
         try {
             localStorage.setItem(DARK_STYLE_KEY, style);
-        } catch (e) {}
+        } catch (e) {
+            // localStorage not available (incognito/private mode, quota exceeded, or disabled)
+            console.warn('Failed to save dark style preference to localStorage:', e.message);
+        }
         applyDarkStyle(style);
     }
 
@@ -79,7 +82,10 @@
     function setLightStyle(style) {
         try {
             localStorage.setItem(LIGHT_STYLE_KEY, style);
-        } catch (e) {}
+        } catch (e) {
+            // localStorage not available (incognito/private mode, quota exceeded, or disabled)
+            console.warn('Failed to save light style preference to localStorage:', e.message);
+        }
         applyLightStyle(style);
     }
 
