@@ -182,6 +182,118 @@
     --text-muted: #15803d;
 }
 
+/* =============================================
+   LIGHT MODE VARIANTS
+   ============================================= */
+
+/* 🌸 Sunset - warm peachy/coral tones */
+[data-theme="light"][data-light-style="sunset"] {
+    --primr-navy: #B45309;
+    --primr-navy-dark: #92400E;
+    --primr-navy-light: #D97706;
+    --primr-red: #DC2626;
+    --primr-red-light: #EF4444;
+    --primr-teal: #0891B2;
+    --primr-teal-dark: #0E7490;
+    --primr-teal-light: #06B6D4;
+    --primr-purple: #C026D3;
+    --primr-aqua: #0284C7;
+    --primr-gold: #F59E0B;
+    --primr-green: #059669;
+    --primr-yellow: #FBBF24;
+
+    --bg-light: #FFF7ED;
+    --bg-lighter: #FFEDD5;
+    --bg-white: #FFFFFF;
+    --text-primary: #78350F;
+    --text-secondary: #92400E;
+    --text-muted: #B45309;
+    --border-light: #FED7AA;
+    --border-medium: #FDBA74;
+    --border-dark: #FB923C;
+}
+
+/* 🌿 Spring - fresh vibrant greens */
+[data-theme="light"][data-light-style="spring"] {
+    --primr-navy: #15803D;
+    --primr-navy-dark: #166534;
+    --primr-navy-light: #16A34A;
+    --primr-red: #DC2626;
+    --primr-red-light: #EF4444;
+    --primr-teal: #0D9488;
+    --primr-teal-dark: #0F766E;
+    --primr-teal-light: #14B8A6;
+    --primr-purple: #7C3AED;
+    --primr-aqua: #0891B2;
+    --primr-gold: #F59E0B;
+    --primr-green: #16A34A;
+    --primr-yellow: #EAB308;
+
+    --bg-light: #F0FDF4;
+    --bg-lighter: #DCFCE7;
+    --bg-white: #FFFFFF;
+    --text-primary: #14532D;
+    --text-secondary: #166534;
+    --text-muted: #15803D;
+    --border-light: #BBF7D0;
+    --border-medium: #86EFAC;
+    --border-dark: #4ADE80;
+}
+
+/* 💜 Lavender - soft elegant purples */
+[data-theme="light"][data-light-style="lavender"] {
+    --primr-navy: #7C3AED;
+    --primr-navy-dark: #6D28D9;
+    --primr-navy-light: #8B5CF6;
+    --primr-red: #DC2626;
+    --primr-red-light: #EF4444;
+    --primr-teal: #0891B2;
+    --primr-teal-dark: #0E7490;
+    --primr-teal-light: #06B6D4;
+    --primr-purple: #A855F7;
+    --primr-aqua: #3B82F6;
+    --primr-gold: #F59E0B;
+    --primr-green: #059669;
+    --primr-yellow: #FBBF24;
+
+    --bg-light: #FAF5FF;
+    --bg-lighter: #F3E8FF;
+    --bg-white: #FFFFFF;
+    --text-primary: #581C87;
+    --text-secondary: #6D28D9;
+    --text-muted: #7C3AED;
+    --border-light: #E9D5FF;
+    --border-medium: #D8B4FE;
+    --border-dark: #C084FC;
+}
+
+/* 🌊 Ocean Breeze - crisp blues and teals */
+[data-theme="light"][data-light-style="ocean-breeze"] {
+    --primr-navy: #1E40AF;
+    --primr-navy-dark: #1E3A8A;
+    --primr-navy-light: #2563EB;
+    --primr-red: #DC2626;
+    --primr-red-light: #EF4444;
+    --primr-teal: #0891B2;
+    --primr-teal-dark: #0E7490;
+    --primr-teal-light: #06B6D4;
+    --primr-purple: #7C3AED;
+    --primr-aqua: #0284C7;
+    --primr-gold: #F59E0B;
+    --primr-green: #059669;
+    --primr-yellow: #FBBF24;
+
+    --bg-light: #EFF6FF;
+    --bg-lighter: #DBEAFE;
+    --bg-white: #FFFFFF;
+    --text-primary: #1E3A8A;
+    --text-secondary: #1E40AF;
+    --text-muted: #3B82F6;
+    --border-light: #BFDBFE;
+    --border-medium: #93C5FD;
+    --border-dark: #60A5FA;
+}
+
 /* Smooth transitions for theme switching */
 body,
 .nav-tab,
